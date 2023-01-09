@@ -1,6 +1,5 @@
 #ifndef MONCANEVAS_H
 #define MONCANEVAS_H
-
 #include <QWidget>
 
 class MonCanevas : public QWidget

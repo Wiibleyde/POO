@@ -8,7 +8,7 @@ QPointF MonCanevas::changeCoo(QPointF p)
 
 float MonCanevas::f(float x)
 {
-    return 5 * sin(x) + sin(25+x);
+    return 5 * sin(x) * sin(25*x);
 }
 
 MonCanevas::MonCanevas(QWidget *parent) : QWidget(parent)
@@ -31,8 +31,9 @@ void MonCanevas::paintEvent(QPaintEvent *)
     painter.drawLine(changeCoo(QPointF(0, -nbyMax)), changeCoo(QPointF(0, nbyMax)));
     QPolygonF points;
     for (double x = -nbxMax; x <= nbxMax; x += 0.001)
-        points << QPointF(10,4);
-        painter.drawPolyline(points);
+        points << changeCoo(QPointF(x, f(x)));
+    painter.setPen(QPen(Qt::red, 2));
+    painter.drawPolyline(points);
 }
 
 void MonCanevas::changeUniteX(int ux)
@@ -41,7 +42,7 @@ void MonCanevas::changeUniteX(int ux)
     repaint();
 }
 
-void MonCanevas::changeUniteX(int uy)
+void MonCanevas::changeUniteY(int uy)
 {
     m_uniteY = uy;
     repaint();
